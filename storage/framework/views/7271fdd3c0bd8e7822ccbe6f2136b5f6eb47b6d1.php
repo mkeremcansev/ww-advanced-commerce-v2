@@ -20,6 +20,13 @@
                                     <div class="single-product-cover img-responsive-rounded">
                                         <?php $__currentLoopData = $product->getAllProductImages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div class="single-slide zoom-image-hover">
+                                                <div class="product-label p-2">
+                                                    <?php $__currentLoopData = getProductLabel($p->discount, $p->price, $product->created_at, $product->getAllProductReviews->avg('rating')); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $l): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <?php if($l['status']): ?>
+                                                            <label class="label-text <?php echo e($l['code']); ?>"><?php echo e($l['title'].$l['value']); ?></label>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </div>
                                                 <img class="img-responsive" src="<?php echo e(asset($i->image)); ?>" alt="<?php echo e($p->title); ?>">
                                             </div>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -110,23 +117,21 @@
                         </div>
                     </div>
                 </div>
-                <!--Single product content End -->
-                <!-- Single product tab start -->
                 <div class="ec-single-pro-tab">
                     <div class="ec-single-pro-tab-wrapper">
                         <div class="ec-single-pro-tab-nav">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-bs-toggle="tab"
-                                        data-bs-target="#ec-spt-nav-details" role="tablist">Detail</a>
+                                        data-bs-target="#ec-spt-nav-details" role="tablist"><?php echo app('translator')->get('words.description'); ?></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-bs-toggle="tab" data-bs-target="#ec-spt-nav-info"
-                                        role="tablist">More Information</a>
+                                        role="tablist"><?php echo app('translator')->get('words.information'); ?></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-bs-toggle="tab" data-bs-target="#ec-spt-nav-review"
-                                        role="tablist">Reviews</a>
+                                        role="tablist"><?php echo app('translator')->get('words.reviews', ['count'=>$product->getAllProductReviews->count()]); ?></a>
                                 </li>
                             </ul>
                         </div>

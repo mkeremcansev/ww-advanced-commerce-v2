@@ -20285,7 +20285,6 @@ section.ec-instagram-section {
   position: relative;
   display: block;
   overflow: hidden;
-  pointer-events: none;
 }
 .ec-product-inner .ec-pro-image .image img {
   z-index: 1;
@@ -20697,9 +20696,6 @@ button.btn-close.qty_close {
   fill: #888888;
 }
 
-a.wishlist .svg_img.pro_svg {
-  width: 16px;
-}
 
 .eccart-pro-items li .ec-pro-content .qty-plus-minus {
   width: 85px;
@@ -23755,9 +23751,6 @@ i.ecicon.eci-star.fill {
     height: 12px;
   }
 
-  a.wishlist .svg_img.pro_svg {
-    height: 17px;
-  }
 
   .svg_img.pro_svg {
     height: 19px;
@@ -24707,12 +24700,17 @@ left: 0px;
   background-color: #fff;
   text-align: left;
   padding: 35px 30px 21px 30px;
-  border: 1px solid #eeeeee;
-  border-radius: 0;
+  border: 1px solid var(--gray);
+  border-radius: 10px;
   color: var(--primary);
   font-size: 18px;
   letter-spacing: 0;
   line-height: 1.6;
+}
+.cw-img-responsive {
+  border-radius: 10px !important;
+  width: 100%;
+  height: 100%;
 }
 .ec-single-pro-tab-content .ec-t-review-wrapper {
   margin-top: 10px;

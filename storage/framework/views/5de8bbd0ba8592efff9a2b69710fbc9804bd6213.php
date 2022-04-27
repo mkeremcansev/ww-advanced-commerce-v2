@@ -15,7 +15,7 @@
                                                 <div class="ec-pro-image-outer">
                                                     <div class="ec-pro-image">
                                                         <a href="<?php echo e(route('web.product.show', $product->slug)); ?>" class="image">
-                                                            <img class="main-image" src="<?php echo e(asset($r->getOneProductImages->image)); ?>" alt="Product" />
+                                                            <img class="main-image" src="<?php echo e(asset($r->getOneProductImages->image)); ?>" alt="<?php echo e($product->title); ?>" />
                                                         </a>
                                                         <div class="product-label p-2">
                                                             <?php $__currentLoopData = getProductLabel($product->discount, $product->price, $r->created_at, $r->getAllProductReviews->avg('rating')); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $l): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

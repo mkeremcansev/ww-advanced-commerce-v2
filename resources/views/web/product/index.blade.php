@@ -20,6 +20,13 @@
                                     <div class="single-product-cover img-responsive-rounded">
                                         @foreach ($product->getAllProductImages as $i)
                                             <div class="single-slide zoom-image-hover">
+                                                <div class="product-label p-2">
+                                                    @foreach (getProductLabel($p->discount, $p->price, $product->created_at, $product->getAllProductReviews->avg('rating')) as $l)
+                                                        @if ($l['status'])
+                                                            <label class="label-text {{ $l['code'] }}">{{ $l['title'].$l['value'] }}</label>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
                                                 <img class="img-responsive" src="{{ asset($i->image) }}" alt="{{ $p->title }}">
                                             </div>
                                         @endforeach
@@ -109,23 +116,21 @@
                         </div>
                     </div>
                 </div>
-                <!--Single product content End -->
-                <!-- Single product tab start -->
                 <div class="ec-single-pro-tab">
                     <div class="ec-single-pro-tab-wrapper">
                         <div class="ec-single-pro-tab-nav">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-bs-toggle="tab"
-                                        data-bs-target="#ec-spt-nav-details" role="tablist">Detail</a>
+                                        data-bs-target="#ec-spt-nav-details" role="tablist">@lang('words.description')</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-bs-toggle="tab" data-bs-target="#ec-spt-nav-info"
-                                        role="tablist">More Information</a>
+                                        role="tablist">@lang('words.information')</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-bs-toggle="tab" data-bs-target="#ec-spt-nav-review"
-                                        role="tablist">Reviews</a>
+                                        role="tablist">@lang('words.reviews', ['count'=>$product->getAllProductReviews->count()])</a>
                                 </li>
                             </ul>
                         </div>

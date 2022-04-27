@@ -61,7 +61,7 @@
                                                 <div class="ec-pro-image-outer">
                                                     <div class="ec-pro-image">
                                                         <a href="{{ route('web.product.show', $product->slug) }}" class="image">
-                                                            <img class="main-image" src="{{ asset($r->getOneProductImages->image) }}" alt="Product" />
+                                                            <img class="main-image" src="{{ asset($r->getOneProductImages->image) }}" alt="{{ $product->title }}" />
                                                         </a>
                                                         <div class="product-label p-2">
                                                             @foreach (getProductLabel($product->discount, $product->price, $r->created_at, $r->getAllProductReviews->avg('rating')) as $l)
