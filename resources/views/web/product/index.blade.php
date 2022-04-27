@@ -19,7 +19,7 @@
                                 <div class="single-product-scroll">
                                     <div class="single-product-cover img-responsive-rounded">
                                         @foreach ($product->getAllProductImages as $i)
-                                            <div class="single-slide zoom-image-hover">
+                                            <div class="single-slide">
                                                 <div class="product-label p-2">
                                                     @foreach (getProductLabel($p->discount, $p->price, $product->created_at, $product->getAllProductReviews->avg('rating')) as $l)
                                                         @if ($l['status'])

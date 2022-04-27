@@ -19,7 +19,7 @@
                                 <div class="single-product-scroll">
                                     <div class="single-product-cover img-responsive-rounded">
                                         <?php $__currentLoopData = $product->getAllProductImages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <div class="single-slide zoom-image-hover">
+                                            <div class="single-slide">
                                                 <div class="product-label p-2">
                                                     <?php $__currentLoopData = getProductLabel($p->discount, $p->price, $product->created_at, $product->getAllProductReviews->avg('rating')); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $l): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <?php if($l['status']): ?>
