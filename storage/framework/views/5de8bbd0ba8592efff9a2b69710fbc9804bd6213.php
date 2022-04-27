@@ -40,8 +40,8 @@
                                                         </span>
                                                         <?php if($product->discount): ?>
                                                             <span class="ec-price">
-                                                                <span class="new-price"><?php echo e(getMoneyOrder($product->price)); ?></span>
-                                                                <span class="old-price"><?php echo e(getMoneyOrder($product->discount)); ?></span>
+                                                                <span class="new-price"><?php echo e(getMoneyOrder($product->discount)); ?></span>
+                                                                <span class="old-price"><?php echo e(getMoneyOrder($product->price)); ?></span>
                                                             </span>
                                                         <?php else: ?>
                                                             <span class="ec-price">

@@ -1,6 +1,7 @@
-
 <div class="ec-side-cart-overlay"></div>
    <div id="ec-side-cart" class="ec-side-cart">
+    <form action="<?php echo e(route('web.shopping.cart.update')); ?>" method="POST">
+        <?php echo csrf_field(); ?>
        <div class="ec-cart-inner">
            <div class="ec-cart-top">
                <div class="ec-cart-title">
@@ -8,67 +9,61 @@
                    <button class="ec-close">×</button>
                </div>
                <ul class="eccart-pro-items">
-                   <li>
-                       <a href="product-left-sidebar.html" class="sidecart_pro_img"><img
-                               src="<?php echo e(asset('web')); ?>/assets/images/product-image/93_1.jpg" alt="product"></a>
-                       <div class="ec-pro-content">
-                           <a href="single-product-left-sidebar.html" class="cart_pro_title">Mens Winter Leathers Jackets</a>
-                           <span class="cart-price"><span>$49.00</span> x 1</span>
-                           <div class="qty-plus-minus">
-                               <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
-                           </div>
-                           <a href="#" class="remove">×</a>
-                       </div>
-                   </li>
-                   <li>
-                       <a href="product-left-sidebar.html" class="sidecart_pro_img"><img
-                               src="<?php echo e(asset('web')); ?>/assets/images/product-image/96_1.jpg" alt="product"></a>
-                       <div class="ec-pro-content">
-                           <a href="product-left-sidebar.html" class="cart_pro_title">Running & Trekking Shoes - White</a>
-                           <span class="cart-price"><span>$150.00</span> x 1</span>
-                           <div class="qty-plus-minus">
-                               <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
-                           </div>
-                           <a href="#" class="remove">×</a>
-                       </div>
-                   </li>
-                   <li>
-                       <a href="product-left-sidebar.html" class="sidecart_pro_img"><img
-                               src="<?php echo e(asset('web')); ?>/assets/images/product-image/111_1.jpg" alt="product"></a>
-                       <div class="ec-pro-content">
-                           <a href="product-left-sidebar.html" class="cart_pro_title">Rose Gold Peacock Earrings</a>
-                           <span class="cart-price"><span>$950.00</span> x 1</span>
-                           <div class="qty-plus-minus">
-                               <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
-                           </div>
-                           <a href="#" class="remove">×</a>
-                       </div>
-                   </li>
+                <?php if(Cart::instance('cart')->content()->count()): ?>
+                    <?php $__currentLoopData = Cart::instance('cart')->content(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php ($product = $c->model); ?>
+                    <?php ($attribute = $product->getOneProductAttributes); ?>
+                        <li>
+                            <a href="<?php echo e(route('web.product.show', $attribute->slug)); ?>" class="sidecart_pro_img">
+                                <img class="img-responsive-rounded" src="<?php echo e(asset($product->getOneProductImages->image)); ?>" alt="<?php echo e($attribute->title); ?>">
+                            </a>
+                            <div class="ec-pro-content">
+                                <a href="<?php echo e(route('web.product.show', $attribute->slug)); ?>" class="cart_pro_title"><?php echo e($attribute->title); ?></a>
+                                <div>
+                                    <?php $__currentLoopData = $c->options['variants']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $o): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <p class="mb-0 mt-1">
+                                        <span><?php echo app('translator')->get('words.get_variant_main', ['variant'=>$o->getOneVariantMain->title]); ?></span><?php echo e($o->title); ?>
+
+                                    </p>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </div>
+                                <input type="hidden" name="rowId[]" value="<?php echo e($c->rowId); ?>">
+                                <span class="cart-price"><span><?php echo e(getMoneyOrder($c->price * $c->qty)); ?></span></span>
+                                <div class="qty-plus-minus">
+                                    <input class="qty-input" type="text" name="quantity[]" value="<?php echo e($c->qty); ?>" />
+                                    
+                                </div>
+                                <a href="<?php echo e(route('web.shopping.cart.delete', $c->rowId)); ?>" class="remove">×</a>
+                            </div>
+                        </li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php else: ?>
+                        <div class="mt-5">
+                            <p class="text-center"><?php echo app('translator')->get('words.shopping_cart_empty'); ?></p>
+                        </div>
+                    <?php endif; ?>
                </ul>
            </div>
            <div class="ec-cart-bottom">
-               <div class="cart-sub-total">
-                   <table class="table cart-table">
-                       <tbody>
-                           <tr>
-                               <td class="text-left">Sub-Total :</td>
-                               <td class="text-right">$300.00</td>
-                           </tr>
-                           <tr>
-                               <td class="text-left">VAT (20%) :</td>
-                               <td class="text-right">$60.00</td>
-                           </tr>
-                           <tr>
-                               <td class="text-left">Total :</td>
-                               <td class="text-right primary-color">$360.00</td>
-                           </tr>
-                       </tbody>
-                   </table>
-               </div>
-               <div class="cart_btn">
-                   <a href="cart.html" class="btn btn-primary">View Cart</a>
-                   <a href="checkout.html" class="btn btn-secondary">Checkout</a>
-               </div>
+               <?php if(Cart::instance('cart')->content()->count()): ?>
+                <div class="cart_btn mt-5">
+                    <button type="submit" class="btn btn-primary"><?php echo app('translator')->get('words.update'); ?></button>
+                </div>
+                    <?php if(Session::get('coupon')): ?>
+                        <div class="cart_btn">
+                            <a href="<?php echo e(route('web.payment.method')); ?>" class="btn btn-secondary"><?php echo app('translator')->get('words.go_to_pay_coupon', ['price'=>getMoneyOrder(getCheckoutMoneyOrder(Cart::instance('cart')->subtotal()) - Session::get('coupon')['price']), 'code'=>Session::get('coupon')['code']]); ?></a>
+                        </div>
+                    <?php else: ?>
+                    <div class="cart_btn">
+                        <a href="<?php echo e(route('web.payment.method')); ?>" class="btn btn-secondary"><?php echo app('translator')->get('words.go_to_pay', ['price'=>getMoneyOrderShoppingCart(Cart::instance('cart')->subtotal())]); ?></a>
+                    </div>
+                    <?php endif; ?>
+               <?php else: ?>
+                    <div class="cart_btn">
+                        <a href="<?php echo e(route('web.index')); ?>" class="btn btn-secondary"><?php echo app('translator')->get('words.go_to_shopping'); ?></a>
+                    </div>
+                <?php endif; ?>
            </div>
        </div>
+    </form>
    </div><?php /**PATH C:\laragon\www\eticaretiniz\resources\views/web/layouts/menu/cart.blade.php ENDPATH**/ ?>

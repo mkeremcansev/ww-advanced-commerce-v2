@@ -24,6 +24,7 @@
    <link rel="stylesheet" href="{{ asset('web/assets/css/plugins/owl.theme.default.min.css') }}" />
    <link rel="stylesheet" href="{{ asset('web/assets/css/plugins/bootstrap.css') }}" />
    <link rel="stylesheet" href="{{ asset('web/assets/css/main.css') }}" />
+   <link rel="stylesheet" href="{{ asset('web/assets/css/responsive.css') }}" />
    <link rel="stylesheet" href="{{ asset('web/assets/css/marquee.css') }}">
    <link rel="stylesheet" href="{{ asset('web/assets/story/demo/style.css') }}">
     <link rel="stylesheet" href="{{ asset('web/assets/story/dist/zuck.min.css') }}">
@@ -46,7 +47,7 @@
                            </ul>
                        </div>
                    </div>
-                   <div class="col header-top-right d-lg-block text-center">
+                   <div class="col header-top-right d-none d-lg-block">
                        <div class="header-top-lan-curr d-flex justify-content-end">
                            <div class="header-top-curr dropdown">
                                <span class="usd"></span>
@@ -56,24 +57,38 @@
                            </div>
                        </div>
                    </div>
-                   <div class="col d-lg-none ">
+                   <div class="col d-lg-none">
                        <div class="ec-header-bottons">
-                           <a href="" class="ec-header-btn ec-header-wishlist">
-                               <div class="header-icon"><img src="{{ asset('web') }}/assets/images/icons/user.png" class="svg_img header_svg" alt="" /></div>
-                           </a>
+                            @auth
+                                <a href="{{ route('web.account.logout.store') }}" class="ec-header-btn ec-header-wishlist">
+                                    <div class="header-icon">
+                                        <img src="{{ asset('web/assets/images/icons/logout.png') }}" class="svg_img header_svg" alt="{{ setting('title') }}" />
+                                    </div>
+                                </a>
+                                <a href="{{ route('web.account.index') }}" class="ec-header-btn ec-header-wishlist">
+                                    <div class="header-icon">
+                                        <img src="{{ asset('web/assets/images/icons/user.png') }}" class="svg_img header_svg" alt="{{ setting('title') }}" />
+                                    </div>
+                                </a>
+                            @else
+                                <a href="{{ route('web.user.login.index') }}" class="ec-header-btn ec-header-wishlist">
+                                    <div class="header-icon">
+                                        <img src="{{ asset('web/assets/images/icons/user.png') }}" class="svg_img header_svg" alt="{{ setting('title') }}" />
+                                    </div>
+                                </a>
+                            @endauth
                            <a href="#ec-side-wishlist" class="ec-header-btn ec-header-wishlist ec-side-toggle">
-                               <div class="header-icon"><img src="{{ asset('web') }}/assets/images/icons/wishlist.png"
-                                       class="svg_img header_svg" alt="" /></div>
+                               <div class="header-icon">
+                                   <img src="{{ asset('web/assets/images/icons/wishlist.png') }}" class="svg_img header_svg" alt="{{ setting('title') }}" />
+                                </div>
                                <span class="ec-header-count">{{ Cart::instance('wishlist')->content()->count() }}</span>
                            </a>
-                           <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
-                               <div class="header-icon"><img src="{{ asset('web') }}/assets/images/icons/cart.png"
-                                       class="svg_img header_svg" alt="" /></div>
-                               <span class="ec-header-count ec-cart-count cart-count-lable">{{ Cart::instance('cart')->content()->count() }}</span>
-                           </a>
-                           <a href="#ec-mobile-menu" class="ec-header-btn ec-side-toggle d-none d-lg-none">
-                               <img src="{{ asset('web/assets/images/icons/menu.svg') }}" class="svg_img header_svg" alt="{{ setting('title') }}" />
-                           </a>
+                           <a href="#ec-side-cart" class="ec-header-btn ec-header-wishlist ec-side-toggle">
+                                <div class="header-icon">
+                                    <img src="{{ asset('web/assets/images/icons/cart.png') }}" class="svg_img header_svg" alt="{{ setting('title') }}" />
+                                </div>
+                                <span class="ec-header-count">{{ Cart::instance('cart')->content()->count() }}</span>
+                            </a>
                        </div>
                    </div>
                </div>
@@ -100,23 +115,36 @@
                        </div>
                        <div class="align-self-center">
                            <div class="ec-header-bottons">
-                               <a href="" class="ec-header-btn ec-header-wishlist">
-                                   <div class="header-icon">
-                                       <img src="{{ asset('web/assets/images/icons/user.png') }}" class="svg_img header_svg" alt="{{ setting('title') }}" />
+                            @auth
+                                <a href="{{ route('web.account.logout.store') }}" class="ec-header-btn ec-header-wishlist">
+                                    <div class="header-icon">
+                                        <img src="{{ asset('web/assets/images/icons/logout.png') }}" class="svg_img header_svg" alt="{{ setting('title') }}" />
                                     </div>
-                               </a>
+                                </a>
+                                <a href="{{ route('web.account.index') }}" class="ec-header-btn ec-header-wishlist">
+                                    <div class="header-icon">
+                                        <img src="{{ asset('web/assets/images/icons/user.png') }}" class="svg_img header_svg" alt="{{ setting('title') }}" />
+                                     </div>
+                                </a>
+                            @else
+                                <a href="{{ route('web.user.login.index') }}" class="ec-header-btn ec-header-wishlist">
+                                    <div class="header-icon">
+                                        <img src="{{ asset('web/assets/images/icons/user.png') }}" class="svg_img header_svg" alt="{{ setting('title') }}" />
+                                     </div>
+                                </a>
+                            @endauth
                                <a href="#ec-side-wishlist" class="ec-header-btn ec-header-wishlist ec-side-toggle">
                                    <div class="header-icon">
                                        <img src="{{ asset('web/assets/images/icons/wishlist.png') }}" class="svg_img header_svg" alt="{{ setting('title') }}" />
                                     </div>
                                    <span class="ec-header-count">{{ Cart::instance('wishlist')->content()->count() }}</span>
                                </a>
-                               <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
-                                   <div class="header-icon">
-                                       <img src="{{ asset('web/assets/images/icons/cart.png') }}" class="svg_img header_svg" alt="{{ setting('title') }}" />
-                                   </div>
-                                   <span class="ec-header-count ec-cart-count cart-count-lable">{{ Cart::instance('cart')->content()->count() }}</span>
-                               </a>
+                               <a href="#ec-side-cart" class="ec-header-btn ec-header-wishlist ec-side-toggle">
+                                    <div class="header-icon">
+                                        <img src="{{ asset('web/assets/images/icons/cart.png') }}" class="svg_img header_svg" alt="{{ setting('title') }}" />
+                                    </div>
+                                    <span class="ec-header-count">{{ Cart::instance('cart')->content()->count() }}</span>
+                                </a>
                            </div>
                        </div>
                        

@@ -1,15 +1,3 @@
-/*-----------------------------------------------------------------------------------
-
-    Item Name: Ecart - Multi Vendor Ecommerce HTML Template.
-    Author: ashishmaraviya
-    Version: 3.1
-    Copyright 2021
-	  Author URI: https://themeforest.net/user/ashishmaraviya
-
------------------------------------------------------------------------------------*/
-/*---------------------------------------------------------------------------------
-    Responsive
------------------------------------------------------------------------------------*/
 /*-----  Responsive Media Quary  -----*/
 @media only screen and (max-width: 1199px) and (min-width: 992px) {
   .pt-48px {
@@ -2324,7 +2312,8 @@
     width: auto;
   }
   .single-pro-content .ec-pro-variation .ec-pro-variation-inner .ec-pro-variation-content li {
-    width: 30px;
+    width: auto;
+    padding: 3px 10px;
     height: 30px;
     font-size: 12px;
   }

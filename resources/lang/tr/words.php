@@ -377,4 +377,5 @@ return [
     'not_have_data'=>'Veri bulunmuyor.',
     'sold_out'=>'Tükendi',
     'typing_your_word'=>'Ayakkabı, Elbise, T-Shirt, Gömlek, Bisiklet...',
+    'update'=>'Güncelle',
 ];

@@ -1,12 +1,3 @@
-/**
-    Item Name: Ekka - Ecommerce HTML Template.
-    Author: ashishmaraviya
-    Version: 3.1
-    Copyright 2021-2022
-	Author URI: https://themeforest.net/user/ashishmaraviya
-**/
-
-// Function To Create New Cookie 
 function ecCreateCookie(cookieName,cookieValue,daysToExpire)
 {
     var date = new Date();
@@ -266,19 +257,6 @@ function ecCheckCookie()
         }
     };
 
-    $(window).on("scroll", function() {
-        var distance = $('.sticky-header-next-sec').offset().top,
-        $window = $(window);
-        
-        if ( $window.scrollTop() <= distance+50 ) {
-            // alert("1");
-            $("#ec-main-menu-desk").removeClass("menu_fixed");
-        }
-        else{
-            // alert("2");
-            checkScroll();
-        }
-    });
 
 
     /*-----------------------------  Navigation for scroll section to section  --------------------*/
@@ -437,24 +415,7 @@ function ecCheckCookie()
             $ekka.removeClass("ec-open");
             $ecMenuToggle.find("a").removeClass("close");
         });
-
-        $("body").on("click", ".ec-pro-content .remove", function(){
-
-        // $(".ec-pro-content .remove").on("click", function () {
-            
-            var cart_product_count = $(".eccart-pro-items li").length;
-            
-            $(this).closest("li").remove();
-            if (cart_product_count == 1) {
-                $('.eccart-pro-items').html('<li><p class="emp-cart-msg">Your cart is empty!</p></li>');
-            }
-
-            var count = $(".cart-count-lable").html();            
-            count--;
-            $(".cart-count-lable").html(count);
-
-            cart_product_count--;
-        });    
+ 
         
     })();
 
@@ -602,33 +563,6 @@ function ecCheckCookie()
     });
 
     /*----------------------------- Product Countdown --------------------- */
-    $("#ec-fs-count-1").countdowntimer({
-        startDate : "2021/10/01 00:00:00",
-        dateAndTime : "2023/01/01 00:00:00",
-        labelsFormat : true,
-        displayFormat : "DHMS"
-    });
-
-    $("#ec-fs-count-2").countdowntimer({
-        startDate : "2021/10/01 00:00:00",
-        dateAndTime : "2022/12/01 00:00:00",
-        labelsFormat : true,
-        displayFormat : "DHMS"
-    });
-
-    $("#ec-fs-count-3").countdowntimer({
-        startDate : "2021/10/01 00:00:00",
-        dateAndTime : "2022/11/01 00:00:00",
-        labelsFormat : true,
-        displayFormat : "DHMS"
-    });
-
-    $("#ec-fs-count-4").countdowntimer({
-        startDate : "2021/10/01 00:00:00",
-        dateAndTime : "2023/03/01 00:00:00",
-        labelsFormat : true,
-        displayFormat : "DHMS"
-    });
 
     /*----------------------------- Feature Product Slider   -------------------------------- */
     $('.ec-fre-products').slick({
@@ -909,7 +843,42 @@ function ecCheckCookie()
         var t=$(this).find(".ec-test-img").html(),o="li:eq("+i+")";
         $("#ec-testimonial-slider").find(".slick-dots").find(o).html(t);
     });
-
+    $('.ec-blog-slider, #ec-cat-slider').owlCarousel({
+        margin:30,
+        loop: true,
+        dots:false,
+        nav:false,
+        smartSpeed: 1000,
+        autoplay:true,
+        items:3,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1,
+                nav:false
+            },
+            576: {
+                items: 2,
+                nav:false
+            },
+            768: {
+                items: 2,
+                nav:false
+            },
+            992: {
+                items: 3,
+                nav:false
+            },
+            1200: {
+                items:4,
+                nav:false
+            },
+            1367: {
+                items: 4,
+                nav:false
+            }
+        }
+    }); 
     /*----------------------------- Brand Slider -------------------------------- */    
     $('#ec-brand-slider').slick({
         rows: 1,
@@ -944,7 +913,41 @@ function ecCheckCookie()
         }
         ]
     });
-
+    $('.ec-new-slider, .ec-special-slider, .ec-best-slider').slick({
+        rows: 4,
+        dots: false,
+        arrows: true,
+        infinite: true,
+        autoplay:false,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        responsive: [
+        {
+            breakpoint: 1200,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                rows: 2,
+                slidesToScroll: 2,
+                slidesToShow: 2,
+            }
+        },
+        {
+            breakpoint: 540,
+            settings: {
+                rows: 2,
+                slidesToScroll: 1,
+                slidesToShow: 1,
+            }
+        }
+        ]
+    });
     /*----------------------------- Footer Toggle -------------------------------- */    
     $(document).ready(function(){
         $("footer .footer-top .ec-footer-widget .ec-footer-links").addClass("ec-footer-dropdown");
@@ -959,21 +962,6 @@ function ecCheckCookie()
     });
 
     /*----------------------------- Gallery image popup on single product page -------------------------------- */
-	$('.popup-gallery').magnificPopup({
-		type: 'image',
-		mainClass: 'mfp-with-zoom',
-		gallery: {
-			enabled: true,
-		},
-		zoom: {
-			enabled: true,
-			duration: 300,
-			easing: 'ease-in-out',
-			opener: function (openerElement) {
-				return openerElement.is('img') ? openerElement : openerElement.find('img');
-			}
-		}
-	});
 
     /*----------------------------- List Grid View -------------------------------- */   
     $('.ec-gl-btn').on('click', 'button', function() {
@@ -1213,7 +1201,12 @@ function ecCheckCookie()
         focusOnSelect: true
     });
 
-
+    function getValidateMessage(error) {
+        let errors = error.responseJSON.errors
+        let firstItem = Object.keys(errors)[0]
+        let firstItemMessage = errors[firstItem][0]
+        return firstItemMessage
+    }
     /*----------------------------- Single Product Color and Size Click to Active -------------------------------- */
     $(document).ready(function() {
         $(".single-pro-content .ec-pro-variation .ec-pro-variation-content li").click(function() {
@@ -1556,3 +1549,14 @@ function ecCheckCookie()
     });
 
 })(jQuery);
+function getValidateMessage(error) {
+    let errors = error.responseJSON.errors
+    let firstItem = Object.keys(errors)[0]
+    let firstItemMessage = errors[firstItem][0]
+    return firstItemMessage
+}
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});

@@ -1,10 +1,3 @@
-/**
-    Item Name: Ecart - Multi Vendor Ecommerce HTML Template.
-    Author: ashishmaraviya
-    Version: 3.1
-    Copyright 2021
-	Author URI: https://themeforest.net/user/ashishmaraviya
-**/
 // Function To Create New Cookie 
 function ecCreateCookie(cookieName,cookieValue,daysToExpire)
 {
@@ -992,7 +985,7 @@ function ecCheckCookie()
         $('.ec-footer-heading').append( "<div class='ec-heading-res'><i class='ecicon eci-angle-down'></i></div>" );
 
         $(".ec-footer-heading .ec-heading-res").click(function() {
-         var $this = $(this).closest('.footer-top .col-sm-12 .ec-footer-widget').find('.ec-footer-dropdown');
+         var $this = $(this).closest('.footer-top .col-lg-4 .ec-footer-widget').find('.ec-footer-dropdown');
          $this.slideToggle('slow');
          $('.ec-footer-dropdown').not($this).slideUp('slow');
      });
@@ -1098,7 +1091,68 @@ function ecCheckCookie()
         return false;
 
     });
+    $(document).ready(function() {
+        $(".single-pro-content .ec-pro-variation .ec-pro-variation-content li").click(function() {
+            $(this).addClass('active').siblings().removeClass('active');
+        });
+    });
+    $('#ec-testimonial-slider').slick({
+        rows: 1,
+        dots: true,
+        arrows: false,
+        centerMode: true,
+        infinite: false,
+        speed: 500,
+        centerPadding: 0,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    });
 
+    $("#ec-testimonial-slider").find(".slick-slide").each(function(i){
+
+        var t=$(this).find(".ec-test-img").html(),o="li:eq("+i+")";
+        $("#ec-testimonial-slider").find(".slick-dots").find(o).html(t);
+    });
+
+    /*----------------------------- Brand Slider -------------------------------- */    
+    $('#ec-brand-slider').slick({
+        rows: 1,
+        dots: false,
+        arrows: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 7,
+        slidesToScroll: 1,
+        responsive: [
+        {
+            breakpoint: 992,
+            settings: {
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                dots: false
+            }
+        },
+        {
+            breakpoint: 600,
+            settings: {
+                slidesToScroll: 1,
+                slidesToShow: 3,
+            }
+        },
+        {
+            breakpoint: 360,
+            settings: {
+                slidesToScroll: 1,
+                slidesToShow: 2,
+            }
+        }
+        ]
+    });
+    $(document).ready(function() {
+        $(".single-pro-content .ec-pro-variation .ec-pro-variation-content li").click(function() {
+            $(this).addClass('active').siblings().removeClass('active');
+        });
+    });
     /*--------------------- Tools sidebar ---------------------- */
     $(".ec-tools-sidebar-toggle").on("click", function (e) {
         e.preventDefault();
@@ -1223,7 +1277,12 @@ function ecCheckCookie()
     var animation = new Animation(options);
 
 })(jQuery);
-
+function getValidateMessage(error) {
+    let errors = error.responseJSON.errors
+    let firstItem = Object.keys(errors)[0]
+    let firstItemMessage = errors[firstItem][0]
+    return firstItemMessage
+}
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

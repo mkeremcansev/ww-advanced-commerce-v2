@@ -86,8 +86,8 @@
                                                         </span>
                                                         @if ($product->discount)
                                                             <span class="ec-price">
-                                                                <span class="new-price">{{ getMoneyOrder($product->price) }}</span>
-                                                                <span class="old-price">{{ getMoneyOrder($product->discount) }}</span>
+                                                                <span class="new-price">{{ getMoneyOrder($product->discount) }}</span>
+                                                                <span class="old-price">{{ getMoneyOrder($product->price) }}</span>
                                                             </span>
                                                         @else
                                                             <span class="ec-price">

@@ -1,7 +1,35 @@
 <?php $__env->startSection('script'); ?>
     <script>
+        window.onload = function() {
+            const stock = $('.variant-attr')
+            let qty = $('#quantity').val()
+            stock.map(response => {
+                let t_stock = parseInt(stock[response].attributes[1].nodeValue)
+                if (qty > t_stock) {
+                    stock[response].classList.add('custom-disabled-alert')
+                    // stock[response].parentElement.classList.remove('custom-data-tooltip')
+                } else {
+                    stock[response].classList.remove('custom-disabled-alert')
+                    // stock[response].parentElement.classList.add('custom-data-tooltip')
+                }
+            })
+        }
+        $('.qty-plus-minus .dec, .qty-plus-minus .inc').on('click', function() {
+        const stock = $('.variant-attr')
+        let qty = $('#quantity').val()
+        stock.map(response => {
+            let t_stock = parseInt(stock[response].attributes[1].value)
+            if (qty > t_stock) {
+                stock[response].classList.add('custom-disabled-alert')
+                // stock[response].parentElement.classList.remove('custom-data-tooltip')
+            } else {
+                stock[response].classList.remove('custom-disabled-alert')
+                // stock[response].parentElement.classList.add('custom-data-tooltip')
+            }
+        })
+        });
         $(document).ready(function(){
-            $('.list-filter a').on('click', function(){
+            $('.custom-variant-attribute').on('click', function(){
                 let count = $(this).attr('variant-stock');
                 $('.custom-stock').text('<?php echo app('translator')->get("words.product_stock_count_detail", ["count"=>"'+count+'"]); ?>')
             })
@@ -12,6 +40,7 @@
                 $('ul .active').each(function() { 
                     variants.push($(this).attr('variant-hash')); 
                 });
+                console.log(variants)
                 let quantity = $('#quantity').val()
                 $.ajax({
                     method: 'POST',
