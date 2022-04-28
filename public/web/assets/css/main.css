@@ -942,7 +942,7 @@ sup {
 }
 
 a {
-  color: #555;
+  color: var(--text);
   text-decoration: underline;
   -webkit-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
@@ -950,6 +950,9 @@ a {
   background-color: transparent;
   border: 0;
   cursor: pointer;
+}
+a:hover {
+  color: var(--text);
 }
 a:not([href]):not([class]) {
   color: inherit;
@@ -24178,7 +24181,7 @@ left: 0px;
   border-color: #3474d4;
 }
 .single-nav-thumb .slick-slide.slick-current.slick-active img {
-  border-color: #3474d4;
+  border-color: var(--primary);
 }
 .single-nav-thumb .slick-arrow {
   top: 42%;
@@ -24362,7 +24365,6 @@ left: 0px;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin-bottom: 15px;
   padding-bottom: 15px;
 }
 .single-pro-content .ec-single-price-stoke > * {
@@ -24771,9 +24773,8 @@ left: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 0 0 25px;
+  margin: 0 0 0;
   padding-bottom: 25px;
-  border-bottom: 1px solid #eeeeee;
 }
 .ec-single-pro-tab-content .ec-t-review-item p {
   color: #777;
@@ -24834,7 +24835,6 @@ left: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 5px 0 25px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -24852,13 +24852,14 @@ left: 0px;
 }
 .ec-single-pro-tab-content .ec-ratting-content .ec-ratting-input input {
   -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   width: 100%;
   margin-bottom: 15px;
   outline: none;
   border: 1px solid #eeeeee;
   color: #444444;
   padding: 5px 20px;
+  border-radius: 10px;
 }
 .ec-single-pro-tab-content .ec-ratting-content .ec-ratting-input input::-webkit-input-placeholder, .ec-single-pro-tab-content .ec-ratting-content .ec-ratting-input textarea::-webkit-input-placeholder {
   color: #777;
@@ -24890,11 +24891,12 @@ left: 0px;
   width: 100%;
   outline: none;
   font-size: 14px;
+  border-radius: 10px;
 }
 .ec-single-pro-tab-content .ec-ratting-content .ec-ratting-input button {
   text-transform: uppercase;
-  font-size: 20px;
   line-height: 1;
+  border-radius: 10px;
 }
 .ec-tab-wrapper-1 .ec-single-pro-tab-content .ec-single-pro-tab-desc p, .ec-tab-wrapper-2 .ec-single-pro-tab-content .ec-single-pro-tab-desc p, .ec-tab-wrapper-3 .ec-single-pro-tab-content .ec-single-pro-tab-desc p, .ec-tab-wrapper-4 .ec-single-pro-tab-content .ec-single-pro-tab-desc p {
   margin: 0;
@@ -24990,4 +24992,87 @@ left: 0px;
 }
 .custom-data-tooltip:hover:after {
  transform: translate3d(-50%, calc(-100% - 16px), 0);
+}
+.star-rating {
+  direction: rtl;
+  text-align: center;
+  margin: 25px 0px
+}
+
+.star-rating input {
+  display: none
+}
+
+.star-rating input:checked~label::after {
+  opacity: 1
+}
+
+.star-rating label {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  margin: 0px 8px
+}
+
+.star-rating label:hover::after {
+  opacity: 1
+}
+
+.star-rating label:hover:hover~label::after {
+  opacity: 1
+}
+
+.star-rating label::before {
+  content: "\2605";
+  font-weight: 900;
+  font-size: 50px;
+  display: block;
+  color: #bbbbbb
+}
+
+.star-rating label::after {
+  content: "\2605";
+  font-weight: 900;
+  font-size: 50px;
+  position: absolute;
+  display: block;
+  top: 0px;
+  left: 0px;
+  color: var(--primary);
+  opacity: 0
+}
+.ec-single-price .off {
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  margin-right: 0.5rem;
+  padding: 0 6px;
+  font-weight: bold;
+}
+.ec-single-pro-a-hover:hover {
+  color: var(--primary);
+}
+/* .single-pro-block {
+  border: 1px solid var(--black);
+  padding: 12px 12px;
+  border-radius: 10px;
+} */
+.single-pro-content {
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+.single-product-scroll {
+  border-radius: 10px;
+  padding: 15px 15px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+.ec-single-pro-tab-content {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }

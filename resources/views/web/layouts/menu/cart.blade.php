@@ -37,7 +37,7 @@
                         </li>
                     @endforeach
                     @else
-                        <div class="mt-5">
+                        <div class="mt-5 mb-5">
                             <p class="text-center">@lang('words.shopping_cart_empty')</p>
                         </div>
                     @endif
@@ -47,6 +47,7 @@
                @if (Cart::instance('cart')->content()->count())
                 <div class="cart_btn mt-5">
                     <button type="submit" class="btn btn-primary">@lang('words.update')</button>
+                    <a href="{{ route('web.shopping.cart.destroy') }}" class="btn btn-secondary">@lang('words.shopping_cart_clear')</a>
                 </div>
                     @if (Session::get('coupon'))
                         <div class="cart_btn">

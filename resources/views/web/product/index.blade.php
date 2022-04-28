@@ -20,13 +20,6 @@
                                     <div class="single-product-cover img-responsive-rounded">
                                         @foreach ($product->getAllProductImages as $i)
                                             <div class="single-slide">
-                                                <div class="product-label p-2">
-                                                    @foreach (getProductLabel($p->discount, $p->price, $product->created_at, $product->getAllProductReviews->avg('rating')) as $l)
-                                                        @if ($l['status'])
-                                                            <label class="label-text {{ $l['code'] }}">{{ $l['title'].$l['value'] }}</label>
-                                                        @endif
-                                                    @endforeach
-                                                </div>
                                                 <img class="img-responsive" src="{{ asset($i->image) }}" alt="{{ $p->title }}">
                                             </div>
                                         @endforeach
@@ -46,6 +39,7 @@
                                     <div class="ec-single-price-stoke">
                                         @if ($p->discount)
                                             <div class="ec-single-price">
+                                                <span class="off">{{ getDiscountCalc($p->price, $p->discount) }}</span>
                                                 <span class="new-price">{{ getMoneyOrder($p->discount) }}</span>
                                                 <span class="old-price">{{ getMoneyOrder($p->price) }}</span>
                                             </div>
@@ -54,7 +48,15 @@
                                             <span class="new-price">{{ getMoneyOrder($p->price) }}</span>
                                         </div>
                                         @endif
-                                        
+                                    </div>
+                                    <div class="ec-single-price">
+                                        <p>
+                                            <span class="ec-single-pro-cat-span">
+                                                <a class="ec-single-pro-a-hover" href="{{ route('web.category.products.show', $product->getOneProductCategory->slug) }}">@lang('words.product_category_name', ['name'=>$product->getOneProductCategory->title])</a>
+                                            </span>
+                                            
+                                            <span class="ml-2 ec-single-pro-brand-span">@lang('words.product_brand_name', ['name'=>$product->getOneProductBrand->title])</span>
+                                        </p>
                                     </div>
                                     <div class="ec-single-rating-wrap">
                                         <div class="ec-single-rating">
@@ -68,10 +70,8 @@
                                     </div>
                                     <div class="ec-single-desc">
                                         {!! getShowMore($p->description).'...' !!}
-                                        <a class="main-text-color" href="#informations">@lang('words.show_more')</a>
+                                        <a class="main-text-color" href="#ec-spt-nav-details">@lang('words.show_more')</a>
                                     </div>
-
-                                    
                                     <div class="ec-pro-variation">
                                         @foreach ($product->getAllProductVariants as $v)
                                         <div class="ec-pro-variation-inner ec-pro-variation-size">
@@ -149,86 +149,59 @@
                                     </ul>
                                 </div>
                             </div>
-
                             <div id="ec-spt-nav-review" class="tab-pane fade">
                                 <div class="row">
                                     <div class="ec-t-review-wrapper">
-                                        <div class="ec-t-review-item">
-                                            <div class="ec-t-review-content">
-                                                <div class="ec-t-review-top">
-                                                    <div class="ec-t-review-name">Jeny Doe</div>
-                                                    <div class="ec-t-review-rating">
-                                                        <i class="ecicon eci-star fill"></i>
-                                                        <i class="ecicon eci-star fill"></i>
-                                                        <i class="ecicon eci-star fill"></i>
-                                                        <i class="ecicon eci-star fill"></i>
-                                                        <i class="ecicon eci-star-o"></i>
+                                        @if ($product->getAllProductReviews->count())
+                                            @foreach ($product->getAllProductReviews as $r)
+                                                <div class="ec-t-review-item">
+                                                    <div class="ec-t-review-content">
+                                                        <div class="ec-t-review-top">
+                                                            <div class="ec-t-review-name">{{ $r->getOneReviewUser->name }}</div>
+                                                            <div class="ec-t-review-rating">
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                <i class="ecicon eci-star @if($r->rating >= $i) fill @endif"></i>
+                                                                @endfor
+                                                            </div>
+                                                        </div>
+                                                        <div class="ec-t-review-bottom">
+                                                            <p>{{ $r->content }}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="ec-t-review-bottom">
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and
-                                                        typesetting industry. Lorem Ipsum has been the industry's
-                                                        standard dummy text ever since the 1500s, when an unknown
-                                                        printer took a galley of type and scrambled it to make a
-                                                        type specimen.
-                                                    </p>
+                                                @endforeach
+                                            @else
+                                                <p class="text-center">@lang('words.not_have_product_review')</p>
+                                            @endif
+                                    </div>
+                                    @auth
+                                        @if(!$product->getAllProductAuthReviews->contains('user_id',Auth::user()->id) AND Auth::user()->email_verified_at)
+                                            <div class="ec-ratting-content">
+                                                <div class="ec-ratting-form">
+                                                    <form action="#">
+                                                        <div class="ec-ratting-star justify-content-center">
+                                                            <div class="star-rating">
+                                                                <input type="radio" class="rating-input" name="rating" id="star-1" value="5">
+                                                                <label for="star-1"></label>
+                                                                <input type="radio" class="rating-input" name="rating" id="star-2" value="4">
+                                                                <label for="star-2"></label>
+                                                                <input type="radio" class="rating-input" name="rating" id="star-3" value="3">
+                                                                <label for="star-3"></label>
+                                                                <input type="radio" class="rating-input" name="rating" id="star-4" value="2">
+                                                                <label for="star-4"></label>
+                                                                <input type="radio" class="rating-input" name="rating" id="star-5" value="1">
+                                                                <label for="star-5"></label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="ec-ratting-input form-submit">
+                                                            <textarea id="review_content" placeholder="@lang('words.content')"></textarea>
+                                                            <button class="btn btn-primary" type="button" id="add-to-review">@lang('words.add_review')</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="ec-t-review-item">
-                                            <div class="ec-t-review-content">
-                                                <div class="ec-t-review-top">
-                                                    <div class="ec-t-review-name">Linda Morgus</div>
-                                                    <div class="ec-t-review-rating">
-                                                        <i class="ecicon eci-star fill"></i>
-                                                        <i class="ecicon eci-star fill"></i>
-                                                        <i class="ecicon eci-star fill"></i>
-                                                        <i class="ecicon eci-star-o"></i>
-                                                        <i class="ecicon eci-star-o"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="ec-t-review-bottom">
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and
-                                                        typesetting industry. Lorem Ipsum has been the industry's
-                                                        standard dummy text ever since the 1500s, when an unknown
-                                                        printer took a galley of type and scrambled it to make a
-                                                        type specimen.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="ec-ratting-content">
-                                        <h3>Add a Review</h3>
-                                        <div class="ec-ratting-form">
-                                            <form action="#">
-                                                <div class="ec-ratting-star">
-                                                    <span>Your rating:</span>
-                                                    <div class="ec-t-review-rating">
-                                                        <i class="ecicon eci-star fill"></i>
-                                                        <i class="ecicon eci-star fill"></i>
-                                                        <i class="ecicon eci-star-o"></i>
-                                                        <i class="ecicon eci-star-o"></i>
-                                                        <i class="ecicon eci-star-o"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="ec-ratting-input">
-                                                    <input name="your-name" placeholder="Name" type="text" />
-                                                </div>
-                                                <div class="ec-ratting-input">
-                                                    <input name="your-email" placeholder="Email*" type="email"
-                                                        required />
-                                                </div>
-                                                <div class="ec-ratting-input form-submit">
-                                                    <textarea name="your-commemt"
-                                                        placeholder="Enter Your Comment"></textarea>
-                                                    <button class="btn btn-primary" type="submit"
-                                                        value="Submit">Submit</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
+                                            @endif
+                                        @endauth
                                 </div>
                             </div>
                         </div>

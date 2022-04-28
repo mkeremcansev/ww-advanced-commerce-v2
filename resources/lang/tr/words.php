@@ -378,4 +378,6 @@ return [
     'sold_out'=>'Tükendi',
     'typing_your_word'=>'Ayakkabı, Elbise, T-Shirt, Gömlek, Bisiklet...',
     'update'=>'Güncelle',
+    'product_category_name'=>'Kategori : :name',
+    'product_brand_name'=>'Marka : :name'
 ];

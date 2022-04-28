@@ -277,7 +277,7 @@
   }
 
   .single-pro-content .ec-pro-variation .ec-pro-variation-inner .ec-pro-variation-content li {
-    width: 25px;
+    width: auto;
     height: 25px;
   }
 

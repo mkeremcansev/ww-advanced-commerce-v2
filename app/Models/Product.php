@@ -44,7 +44,7 @@ class Product extends Model
     }
     public function getAllProductReviews()
     {
-        return $this->hasMany(ProductReview::class, 'product_id', 'id')->whereStatus(1);
+        return $this->hasMany(ProductReview::class, 'product_id', 'id')->whereStatus(1)->orderBy('id', 'DESC');
     }
     public function getAllProductAuthReviews()
     {

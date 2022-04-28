@@ -40,7 +40,6 @@
                 $('ul .active').each(function() { 
                     variants.push($(this).attr('variant-hash')); 
                 });
-                console.log(variants)
                 let quantity = $('#quantity').val()
                 $.ajax({
                     method: 'POST',

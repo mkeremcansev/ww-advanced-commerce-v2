@@ -955,7 +955,7 @@ function ecCheckCookie()
         $('.ec-footer-heading').append( "<div class='ec-heading-res'><i class='ecicon eci-angle-down'></i></div>" );
 
         $(".ec-footer-heading .ec-heading-res").click(function() {
-           var $this = $(this).closest('.footer-top .col-sm-12').find('.ec-footer-dropdown');
+           var $this = $(this).closest('.footer-top .col-lg-4').find('.ec-footer-dropdown');
            $this.slideToggle('slow');
            $('.ec-footer-dropdown').not($this).slideUp('slow');
        });

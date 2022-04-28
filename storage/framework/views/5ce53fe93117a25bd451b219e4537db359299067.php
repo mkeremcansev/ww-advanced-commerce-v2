@@ -38,7 +38,7 @@
                         </li>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <?php else: ?>
-                        <div class="mt-5">
+                        <div class="mt-5 mb-5">
                             <p class="text-center"><?php echo app('translator')->get('words.shopping_cart_empty'); ?></p>
                         </div>
                     <?php endif; ?>
@@ -48,6 +48,7 @@
                <?php if(Cart::instance('cart')->content()->count()): ?>
                 <div class="cart_btn mt-5">
                     <button type="submit" class="btn btn-primary"><?php echo app('translator')->get('words.update'); ?></button>
+                    <a href="<?php echo e(route('web.shopping.cart.destroy')); ?>" class="btn btn-secondary"><?php echo app('translator')->get('words.shopping_cart_clear'); ?></a>
                 </div>
                     <?php if(Session::get('coupon')): ?>
                         <div class="cart_btn">
