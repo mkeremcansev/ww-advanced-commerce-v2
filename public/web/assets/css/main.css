@@ -24170,7 +24170,7 @@ left: 0px;
   cursor: pointer;
 }
 .single-nav-thumb .slick-slide:hover img {
-  border-color: #3474d4;
+  border-color: var(--primary);
 }
 .single-nav-thumb .slick-slide.slick-current.slick-active img {
   border-color: var(--primary);

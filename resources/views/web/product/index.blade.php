@@ -24,7 +24,6 @@
                                             </div>
                                         @endforeach
                                     </div>
-                                    @if($product->getAllProductImages->count() > 1)
                                         <div class="single-nav-thumb">
                                             @foreach ($product->getAllProductImages as $i)
                                                 <div class="single-slide">
@@ -32,7 +31,6 @@
                                                 </div>
                                             @endforeach
                                         </div>
-                                    @endif
                                 </div>
                             </div>
                             <div class="single-pro-desc single-pro-desc-no-sidebar">
