@@ -24,13 +24,15 @@
                                             </div>
                                         @endforeach
                                     </div>
-                                    <div class="single-nav-thumb">
-                                        @foreach ($product->getAllProductImages as $i)
-                                            <div class="single-slide">
-                                                <img class="img-responsive img-responsive-rounded" src="{{ asset($i->image) }}" alt="{{ $p->title }}">
-                                            </div>
-                                        @endforeach
-                                    </div>
+                                    @if($product->getAllProductImages->count() > 1)
+                                        <div class="single-nav-thumb">
+                                            @foreach ($product->getAllProductImages as $i)
+                                                <div class="single-slide">
+                                                    <img class="img-responsive img-responsive-rounded" src="{{ asset($i->image) }}" alt="{{ $p->title }}">
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="single-pro-desc single-pro-desc-no-sidebar">

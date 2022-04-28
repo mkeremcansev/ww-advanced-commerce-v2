@@ -24,13 +24,15 @@
                                             </div>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </div>
-                                    <div class="single-nav-thumb">
-                                        <?php $__currentLoopData = $product->getAllProductImages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <div class="single-slide">
-                                                <img class="img-responsive img-responsive-rounded" src="<?php echo e(asset($i->image)); ?>" alt="<?php echo e($p->title); ?>">
-                                            </div>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </div>
+                                    <?php if($product->getAllProductImages->count() > 1): ?>
+                                        <div class="single-nav-thumb">
+                                            <?php $__currentLoopData = $product->getAllProductImages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <div class="single-slide">
+                                                    <img class="img-responsive img-responsive-rounded" src="<?php echo e(asset($i->image)); ?>" alt="<?php echo e($p->title); ?>">
+                                                </div>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="single-pro-desc single-pro-desc-no-sidebar">
