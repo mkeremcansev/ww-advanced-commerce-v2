@@ -1,12 +1,12 @@
 @section('script')
     <script>
         window.onload = function() {
-            const stock = $('.variant-attr')
+            let stock = $('.variant-attr')
             let qty = $('#quantity').val()
             stock.map(response => {
-                let t_stock = parseInt(stock[response].attributes[1].nodeValue)
-                if (qty > t_stock) {
+                if (qty > parseInt(stock[response].attributes[2].nodeValue)) {
                     stock[response].classList.add('custom-disabled-alert')
+                    $('.custom-variant-attribute').removeClass('active')
                     // stock[response].parentElement.classList.remove('custom-data-tooltip')
                 } else {
                     stock[response].classList.remove('custom-disabled-alert')
@@ -14,19 +14,33 @@
                 }
             })
         }
-        $('.qty-plus-minus .dec, .qty-plus-minus .inc').on('click', function() {
-        const stock = $('.variant-attr')
-        let qty = $('#quantity').val()
-        stock.map(response => {
-            let t_stock = parseInt(stock[response].attributes[1].value)
-            if (qty > t_stock) {
-                stock[response].classList.add('custom-disabled-alert')
-                // stock[response].parentElement.classList.remove('custom-data-tooltip')
-            } else {
-                stock[response].classList.remove('custom-disabled-alert')
-                // stock[response].parentElement.classList.add('custom-data-tooltip')
-            }
-        })
+        //.qty-plus-minus .dec, 
+        $('.qty-plus-minus .inc').on('click', function() {
+            let stock = $('.variant-attr')
+            stock.map(response => {
+                let qty = parseInt($('#quantity').val())+1
+                if (qty > parseInt(stock[response].attributes[2].nodeValue)) {
+                    stock[response].classList.add('custom-disabled-alert')
+                    $('.custom-variant-attribute').removeClass('active')
+                    // stock[response].parentElement.classList.remove('custom-data-tooltip')
+                } else {
+                    stock[response].classList.remove('custom-disabled-alert')
+                    // stock[response].parentElement.classList.add('custom-data-tooltip')
+                }
+            })
+        });
+        $('.qty-plus-minus .dec').on('click', function() {
+            let stock = $('.variant-attr')
+            stock.map(response => {
+                let qty = parseInt($('#quantity').val())-1
+                if (qty > parseInt(stock[response].attributes[2].nodeValue)) {
+                    stock[response].classList.add('custom-disabled-alert')
+                    // stock[response].parentElement.classList.remove('custom-data-tooltip')
+                } else {
+                    stock[response].classList.remove('custom-disabled-alert')
+                    // stock[response].parentElement.classList.add('custom-data-tooltip')
+                }
+            })
         });
         $(document).ready(function(){
             $('.custom-variant-attribute').on('click', function(){

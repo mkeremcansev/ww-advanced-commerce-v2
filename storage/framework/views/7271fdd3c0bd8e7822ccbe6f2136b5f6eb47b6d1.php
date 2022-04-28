@@ -69,7 +69,7 @@
                                         </span>
                                     </div>
                                     <div class="ec-single-desc">
-                                        <?php echo getShowMore($p->description).'...'; ?>
+                                        <?php echo e(str_replace('&nbsp;',' ',strip_tags(getShowMore($p->description).'...'))); ?>
 
                                         <a class="main-text-color" href="#ec-spt-nav-details"><?php echo app('translator')->get('words.show_more'); ?></a>
                                     </div>
@@ -105,9 +105,19 @@
                                         <div class="qty-plus-minus">
                                             <input class="qty-input" type="text" name="quantity" id="quantity" value="1" />
                                         </div>
-                                        <div class="ec-single-cart ">
-                                            <button class="btn btn-primary" id="add-to-cart"><?php echo app('translator')->get('words.add_to_cart'); ?></button>
-                                        </div>
+                                        <?php if(setting('whatsapp_info')): ?>
+                                            <div class="ec-single-cart ml-2">
+                                                <button class="btn btn-primary" id="add-to-cart"><?php echo app('translator')->get('words.add_to_cart'); ?></button>
+                                            </div>
+                                            <div class="ec-single-cart mr-2">
+                                                <a class="btn btn-primary" href="<?php echo app('translator')->get('words.whatsapp_url', ['url'=>'https://wa.me', 'phone'=>setting('phone'), 'product'=>$p->title, 'current_url'=>url()->current()]); ?>"><?php echo app('translator')->get('words.information_from_whatsapp'); ?></a>
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="ec-single-cart">
+                                                <button class="btn btn-primary" id="add-to-cart"><?php echo app('translator')->get('words.add_to_cart'); ?></button>
+                                            </div>
+                                        <?php endif; ?>
+                                        
                                         <div class="ec-single-wishlist">
                                             <a id="add-to-wishlist" class="ec-btn-group wishlist" title="<?php echo e(setting('title')); ?>"><img src="<?php echo e(asset('web/assets/images/icons/wishlistwhite.png')); ?>" class="svg_img pro_svg" alt="<?php echo e(setting('title')); ?>" /></a>
                                         </div>

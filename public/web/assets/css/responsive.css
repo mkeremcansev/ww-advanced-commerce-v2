@@ -1461,7 +1461,7 @@
 
   .ec-login-wrapper .ec-login-container .ec-login-form .btn {
     font-size: 14px;
-    width: auto;
+    width: 100%;
     margin-top: 15px;
     height: 40px;
     min-width: unset;
@@ -1592,6 +1592,9 @@
     height: 44px;
     line-height: 44px;
     font-size: 14px;
+  }
+  .ec-single-qty {
+    justify-content: center;
   }
   .single-pro-content .ec-single-qty .qty-plus-minus {
     height: 44px;
@@ -2357,9 +2360,6 @@
     padding-left: 20px;
   }
   .ec-single-pro-tab-content .ec-single-pro-tab-moreinfo ol {
-    padding-left: 20px;
-  }
-  .ec-single-pro-tab-content .ec-single-pro-tab-moreinfo ul {
     padding-left: 20px;
   }
   .ec-single-pro-tab-content .ec-single-pro-tab-moreinfo li span {

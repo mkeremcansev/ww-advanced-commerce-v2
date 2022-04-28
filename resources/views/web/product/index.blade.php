@@ -69,7 +69,7 @@
                                         </span>
                                     </div>
                                     <div class="ec-single-desc">
-                                        {!! getShowMore($p->description).'...' !!}
+                                        {{ str_replace('&nbsp;',' ',strip_tags(getShowMore($p->description).'...')) }}
                                         <a class="main-text-color" href="#ec-spt-nav-details">@lang('words.show_more')</a>
                                     </div>
                                     <div class="ec-pro-variation">
@@ -104,9 +104,19 @@
                                         <div class="qty-plus-minus">
                                             <input class="qty-input" type="text" name="quantity" id="quantity" value="1" />
                                         </div>
-                                        <div class="ec-single-cart ">
-                                            <button class="btn btn-primary" id="add-to-cart">@lang('words.add_to_cart')</button>
-                                        </div>
+                                        @if (setting('whatsapp_info'))
+                                            <div class="ec-single-cart ml-2">
+                                                <button class="btn btn-primary" id="add-to-cart">@lang('words.add_to_cart')</button>
+                                            </div>
+                                            <div class="ec-single-cart mr-2">
+                                                <a class="btn btn-primary" href="@lang('words.whatsapp_url', ['url'=>'https://wa.me', 'phone'=>setting('phone'), 'product'=>$p->title, 'current_url'=>url()->current()])">@lang('words.information_from_whatsapp')</a>
+                                            </div>
+                                        @else
+                                            <div class="ec-single-cart">
+                                                <button class="btn btn-primary" id="add-to-cart">@lang('words.add_to_cart')</button>
+                                            </div>
+                                        @endif
+                                        
                                         <div class="ec-single-wishlist">
                                             <a id="add-to-wishlist" class="ec-btn-group wishlist" title="{{ setting('title') }}"><img src="{{ asset('web/assets/images/icons/wishlistwhite.png') }}" class="svg_img pro_svg" alt="{{ setting('title') }}" /></a>
                                         </div>

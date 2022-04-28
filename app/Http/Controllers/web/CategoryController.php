@@ -15,7 +15,7 @@ class CategoryController extends Controller
         $products = Product::with(['getOneProductAttributes', 'getOneProductImages', 'getAllProductReviews', 'getAllProductVariants.getAllVariantAttributes'])
         ->whereStatus(1)
         ->where('category_id', $category->id)
-        ->paginate(15);
+        ->paginate(8);
         return view('web.products.category.index', ['products' => $products, 'category'=>$category]);
     }
 }

@@ -42,7 +42,7 @@ class SearchController extends Controller
                         $query
                             ->where('title', 'LIKE', "%{$request->search}%");
                     });
-            })->paginate(15)->withQueryString();
+            })->paginate(8)->withQueryString();
 
         return view('web.products.search.index', ['products' => $products]);
     }

@@ -3,60 +3,81 @@
 @section('description', setting('description'))
 @section('keywords', setting('keywords'))
 @section('content')
-    <section class="inner-section shop-part">
+    <section class="section ec-product-tab section-space-p">
         <div class="container">
             @if ($products->count())
-                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-5">
-                    @foreach ($products as $p)
-                    @php($product = $p->getOneProductAttributes)
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="row margin-minus-b-15">
                         <div class="col">
-                            <div class="product-card {{ getStockControl($p->getAllProductVariants) }}">
-                                <div class="product-media">
-                                    <div class="product-label p-2">
-                                        @foreach (getProductLabel($product->discount, $product->price, $p->created_at, $p->getAllProductReviews->avg('rating')) as $l)
-                                            @if ($l['status'])
-                                                <label class="label-text {{ $l['code'] }}">{{ $l['title'].$l['value'] }}</label>
-                                            @endif
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active">
+                                    <div class="row">
+                                        @foreach ($products as $r)
+                                            @php($product = $r->getOneProductAttributes)
+                                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 ec-product-content">
+                                                <div class="ec-product-inner">
+                                                    <div class="ec-pro-image-outer">
+                                                        <div class="ec-pro-image">
+                                                            <a href="{{ route('web.product.show', $product->slug) }}" class="image">
+                                                                <img class="main-image" src="{{ asset($r->getOneProductImages->image) }}" alt="{{ $product->title }}" />
+                                                            </a>
+                                                            <div class="product-label p-2">
+                                                                @foreach (getProductLabel($product->discount, $product->price, $r->created_at, $r->getAllProductReviews->avg('rating')) as $l)
+                                                                    @if ($l['status'])
+                                                                        <label class="label-text {{ $l['code'] }}">{{ $l['title'].$l['value'] }}</label>
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ec-pro-content">
+                                                        <a href="{{ route('web.category.products.show', $r->getOneProductCategory->slug) }}"><h6 class="ec-pro-stitle">{{ $r->getOneProductCategory->title }}</h6></a> 
+                                                        <h5 class="ec-pro-title">
+                                                            <a href="{{ route('web.product.show', $product->slug) }}">{{ $product->title }}</a>
+                                                        </h5>
+                                                        <div class="ec-pro-rat-price">
+                                                            <span class="ec-pro-rating">
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    <i class="ecicon eci-star @if(round((float)$r->getAllProductReviews->avg('rating')) >= $i) fill @endif"></i>
+                                                                @endfor
+                                                            </span>
+                                                            @if ($product->discount)
+                                                                <span class="ec-price">
+                                                                    <span class="new-price">{{ getMoneyOrder($product->discount) }}</span>
+                                                                    <span class="old-price">{{ getMoneyOrder($product->price) }}</span>
+                                                                </span>
+                                                            @else
+                                                                <span class="ec-price">
+                                                                    <span class="new-price">{{ getMoneyOrder($product->price) }}</span>
+                                                                </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endforeach
                                     </div>
-                                    <a class="product-image" href="{{ route('web.product.show', $product->slug) }}">
-                                        <img src="{{ asset($p->getOneProductImages->image) }}" class="rounded-3" alt="{{ $product->title }}">
-                                    </a>
-                                </div>
-                                <div class="product-content">
-                                    <div class="product-rating">
-                                        @for ($i = 1; $i <= 5; $i++)
-                                            <i class="@if(round((float)$p->getAllProductReviews->avg('rating')) >= $i) active @endif  icofont-star"></i>
-                                        @endfor
-                                    </div>
-                                    <h6 class="product-name">
-                                        <a href="{{ route('web.product.show', $product->slug) }}">{{ $product->title }}</a>
-                                    </h6>
-                                    <h6 class="product-price">
-                                    @if ($product->discount)
-                                        <del>{{ getMoneyOrder($product->price) }}</del>
-                                        <span>{{ getMoneyOrder($product->discount) }}</span>
-                                    @else
-                                        <span>{{ getMoneyOrder($product->price) }}</span>
-                                    @endif
-                                    </h6>
-                                    <a href="{{ route('web.product.show', $product->slug) }}" class="product-add" title="@lang('words.detail')">
-                                        <i class="fas fa-search"></i>
-                                        <span>@lang('words.detail')</span>
-                                    </a>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-            @else
-            <div class="row row-cols-12 row-cols-md-12 row-cols-lg-12 row-cols-xl-12">
-                <div class="product-card pb-5 pt-5 mt-5">
-                        <h5 class="text-center">@lang('words.category_not_have_product')</h5>
                     </div>
+                </div>
+            </div>
+            @else
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ec-product-content">
+                        <div class="ec-product-inner">
+                            <h5 class="text-center p-5 custom-color-text">@lang('words.category_not_have_product')</h5>
+                        </div>
+                    </div>
+                </div>
             </div>
             @endif
-             {{ $products->links('vendor.pagination.pagination') }}
+            <div class="row mt-5">
+                {{ $products->links('vendor.pagination.pagination') }}
+            </div>
         </div>
     </section>
 @endsection

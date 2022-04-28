@@ -1,4 +1,3 @@
-
 <section class="section ec-product-tab section-space-p">
     <div class="container">
         <div class="row">
@@ -24,7 +23,6 @@
                                                                 <?php endif; ?>
                                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                         </div>
-                                                        
                                                     </div>
                                                 </div>
                                                 <div class="ec-pro-content">

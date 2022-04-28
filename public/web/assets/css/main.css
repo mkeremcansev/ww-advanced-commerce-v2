@@ -1,16 +1,4 @@
 @charset "UTF-8";
-:root {
-  --primary : rgb(0, 102, 255);
-  --primary-opacity: rgb(190, 216, 255);
-  --text: #555;
-  --white: #fff;
-  --black: #000;
-  --red: red;
-  --red-opacity: rgb(253, 212, 212);
-  --orange: orange;
-  --green: rgb(0, 143, 0);
-  --gray: #eeeeee;
-}
 @font-face {
   font-family: "Poppins, sans-serif";
   src: url("./../fonts/poppins/Poppins-Thin.ttf") format("truetype");
@@ -17292,6 +17280,10 @@ body.ec-open:before {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  
+}
+.ec-footer .footer-top .ec-footer-widget .ec-footer-links .ec-footer-link a{
+  word-break: break-word !important;
 }
 .ec-footer .footer-top .ec-footer-widget .ec-footer-links .ec-footer-link:not(:last-child) {
   margin-bottom: 16px;
@@ -18371,7 +18363,7 @@ ul.slick-dots {
 }
 .slick-arrow:before {
   content: "";
-  color: #444444;
+  color: var(--black);
   position: relative;
   font-size: 24px;
   font-family: "EcIcons";
@@ -18380,7 +18372,7 @@ ul.slick-dots {
   height: 30px;
 }
 .slick-arrow:hover:before {
-  color: var(--primary);
+  color: var(--black);
 }
 
 .slick-arrow.slick-prev {
@@ -20587,7 +20579,7 @@ section.ec-instagram-section {
 .ec-product-inner .ec-pro-content .ec-price span.old-price {
   font-size: 14px;
   text-decoration: line-through;
-  color: #777;
+  color: var(--red);
 }
 .ec-product-inner .ec-pro-content .btn {
   -ms-flex-item-align: center;
@@ -20782,7 +20774,7 @@ i.ecicon.eci-star {
 }
 
 i.ecicon.eci-star.fill {
-  color: var(--primary);
+  color: var(--orange);
 }
 
 .ec-pro-option {
@@ -24249,12 +24241,13 @@ left: 0px;
 }
 .single-pro-content .ec-single-desc {
   margin-bottom: 12px;
-  color: #777;
+  color: var(--text);
   font-size: 14px;
   letter-spacing: 0;
   word-break: break-all;
   line-height: 1.7;
   font-family: "Montserrat";
+  word-break: break-word;
 }
 .single-pro-content .ec-single-sales {
   margin: 25px 0 30px 0;
@@ -24396,7 +24389,7 @@ left: 0px;
   letter-spacing: 0;
 }
 .single-pro-content .ec-single-price span.old-price {
-  color: var(--text);
+  color: var(--red);
   margin-left: 10px;
   text-decoration:line-through;
   font-weight: 700;
@@ -25038,7 +25031,7 @@ left: 0px;
   display: block;
   top: 0px;
   left: 0px;
-  color: var(--primary);
+  color: var(--orange);
   opacity: 0
 }
 .ec-single-price .off {
@@ -25075,4 +25068,132 @@ left: 0px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+.ec-login-wrapper {
+  max-width: 530px;
+  margin: 0 auto 0;
+}
+.ec-login-wrapper .ec-login-container {
+  border: 1px solid var(--gray);
+  border-radius: 10px;
+  padding: 28px 38px 28px;
+  text-align: left;
+  background-color: var(--white);
+}
+.ec-login-wrapper .ec-login-container .ec-login-form form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.ec-login-wrapper .ec-login-container .ec-login-form input {
+  background-color: transparent;
+  border: 1px solid var(--gray);
+  color: var(--text);
+  border-radius: 10px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  padding: 0 15px;
+  width: 100%;
+  outline: none;
+}
+.ec-login-wrapper .ec-login-container .ec-login-form .ec-login-wrap + .ec-login-wrap input {
+  margin-bottom: 15px;
+}
+.ec-login-wrapper .ec-login-container .ec-login-form .ec-login-fp label {
+  margin-bottom: 0;
+}
+.ec-login-wrapper .ec-login-container .ec-login-form .ec-login-fp label a {
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0px;
+}
+.ec-login-wrapper .ec-login-container .ec-login-form .ec-login-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.ec-login-wrapper .ec-login-container .ec-login-form .btn {
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  padding: 0 15px;
+  text-transform: uppercase;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  outline: none;
+  border-radius: 10px;
+  width: 100%;
+  margin: 15px auto 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.custom-color-primary {
+  color: var(--primary) !important;
+}
+.custom-color-text {
+  color: var(--text) !important;
+}
+ .form-check input {
+  width: 20px;
+  height: 20px;
+  color: var(--primary);
+}
+.ec-login-wrap-new input{
+  width: auto !important;
+}
+.ec-login-wrap-new {
+  align-items: center !important;
+  justify-content: center !important;
+  padding-left: 0px !important;
+}
+.mt-5 .pagination {
+  justify-content: center !important;
+}
+.mt-5 .page-link:focus {
+  color: var(--primary);
+  background-color: var(--white);
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 1px var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+.mt-5 .page-item.active .page-link {
+  z-index: 3;
+color: var(--white);
+background-color: var(--primary);
+border-color: var(--primary);
+}
+.mt-5 .page-item {
+  min-width: 50px;
+  min-height: 50px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center !important;
+}
+.mt-5 .page-item .page-link {
+  border-radius: 10px !important;
+}
+.mt-5 .page-link:hover {
+  z-index: 2;
+  color: var(--primary);
+  background-color: var(--white);
+  border-color: var(--primary);
 }
