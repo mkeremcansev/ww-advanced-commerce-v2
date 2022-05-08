@@ -221,12 +221,17 @@
                         </div>
                     </div>
                 </div>
-                <!-- product details description area end -->
             </div>
-
         </div>
     </div>
 </section>
-    
+<?php if($product->getAllProductHits->count()): ?>
+    <div class="recent-purchase">
+        <div class="detail">
+            <h6><?php echo app('translator')->get('words.product_show_count', ['count'=>$product->getAllProductHits->count()]); ?></h6>
+        </div>
+        <a href="javascript:void(0)" class="icon-btn recent-close">×</a>
+    </div>
+<?php endif; ?>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('web.layouts.extends', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\eticaretiniz\resources\views/web/product/index.blade.php ENDPATH**/ ?>

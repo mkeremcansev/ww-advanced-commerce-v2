@@ -20,7 +20,6 @@ use App\Http\Controllers\web\auth\RegisterController;
 use App\Http\Controllers\web\CacheController;
 use App\Http\Controllers\web\CampaignController;
 use App\Http\Controllers\web\CategoryController;
-use App\Http\Controllers\web\CurrencyController;
 use App\Http\Controllers\web\HomepageController;
 use App\Http\Controllers\web\MigrateController;
 use App\Http\Controllers\web\PageController;
